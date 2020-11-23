@@ -26,10 +26,7 @@ public final class ReciprocalArraySum {
      * @return The sum of the reciprocals of the array input
      */
     protected static double seqArraySum(final double[] input) {
-        double sum = 0.0;
-        for (double numb : input)
-            sum += (1/numb);
-        return sum;
+        return Arrays.stream(input).map(numb -> (1/numb)).sum();
     }
 
     /**
@@ -80,9 +77,6 @@ public final class ReciprocalArraySum {
 
         @Override
         protected void compute() {
-            // TODO: Implement Thread forking on Threshold value. (If size of
-            // array smaller than threshold: compute sequentially else, fork 
-            // 2 new threads
            if(!((endIndexExclusive-startIndexInclusive) > SEQUENTIAL_THRESHOLD))
                 value += seqArraySum(Arrays.copyOfRange(input, startIndexInclusive, endIndexExclusive));
            else {
@@ -98,7 +92,6 @@ public final class ReciprocalArraySum {
   
 
     /**
-     * TODO: Extend the work you did to implement parArraySum to use a set
      * number of tasks to compute the reciprocal array sum. 
      *
      * @param input Input array
